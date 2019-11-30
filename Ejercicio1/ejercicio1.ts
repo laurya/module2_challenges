@@ -14,15 +14,15 @@ quedaría aplanado como:
 
 const sample = [1, [2, 3], [[4], [5, 6, [7, 8, [9]]]]];
 
-
 function buildNewFlatArray(sample) {
-   return sample.reduce((acc, val) => Array.isArray(val) ? 
-        acc.concat(buildNewFlatArray(val)) : acc.concat(val), []);
+  return sample.reduce(
+    (acc, val) =>
+      Array.isArray(val) ? acc.concat(buildNewFlatArray(val)) : acc.concat(val),
+    []
+  );
 }
 
-buildNewFlatArray(sample); 
-
-
+buildNewFlatArray(sample);
 
 /*
 Apartado B
@@ -33,3 +33,21 @@ serán de naturaleza mixta, es decir, sus elementos siempre serán del mismo
 tipo ¿Serías capaz de proporcionar
 un tipado adecuado a dicha función de aplanamiento?
 */
+
+const sample2: (number | number[] | (number | (number | number[])[])[][])[] = [
+  1,
+  [2, 3],
+  [[4], [5, 6, [7, 8, [9]]]]
+];
+
+function buildTypeNewFlatArray(sample) {
+  return sample.reduce(
+    (acc, val) =>
+      Array.isArray(val)
+        ? acc.concat(buildTypeNewFlatArray(val))
+        : acc.concat(val),
+    []
+  );
+}
+
+buildTypeNewFlatArray(sample);
