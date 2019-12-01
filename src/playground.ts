@@ -1,30 +1,20 @@
 console.log("playgroundTS");
 
-const sample = [1, [2, 3], [[4], [5, 6, [7, 8, [9]]]]];
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-function buildNewFlatArray(sample) {
-  return sample.reduce(
-    (acc, val) =>
-      Array.isArray(val) ? acc.concat(buildNewFlatArray(val)) : acc.concat(val),
-    []
-  );
-}
-
-buildNewFlatArray(sample);
-
-const myObject = {
-  a: 1,
-  b: {
-    c: null,
-    d: {
-      e: 3,
-      f: {
-        g: "bingo"
-      }
-    }
-  }
+const showMessage = async ([time, message]) => {
+  await delay(time);
+  console.log(message);
 };
 
-function deepGet(myObject, toLook) {
-  return;
-}
+const triggers = [
+  async () => await showMessage([200, "third"]),
+  async () => await showMessage([100, "second"])
+];
+
+const run = triggers => {
+  triggers.forEach(t => t());
+  console.log("first");
+};
+
+run(triggers);
