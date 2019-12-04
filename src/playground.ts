@@ -1,3 +1,5 @@
+import { async } from "q";
+
 console.log("playgroundTS");
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -14,7 +16,7 @@ const triggers = [
 
 const run = triggers => {
   triggers.forEach(t => t());
-  console.log("first");
+  //console.log("first");
 };
 
 run(triggers);
